@@ -1,7 +1,9 @@
+'use server'
 import kv from '@vercel/kv'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const user = await kv.hgetall('user:me')
-  return NextResponse.json(user)
+  await kv.set('Max', '1839193719')
+  const session = await kv.get('user_1_session')
+  console.log(NextResponse.json(session))
 }
