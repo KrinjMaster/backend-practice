@@ -2,8 +2,14 @@
 import kv from '@vercel/kv'
 import { NextResponse } from 'next/server'
 
-export async function GET() {
-  await kv.set('Max', '1839193719')
-  const session = await kv.get('user_1_session')
-  console.log(NextResponse.json(session))
+export async function POST(username: string, password: string) {
+  await kv.hset('KrinjMaster', {
+    username: username,
+    password: password,
+  })
+  return
+}
+export async function GET(username: string) {
+  const session = await kv.hgetall(username)
+  return session
 }
