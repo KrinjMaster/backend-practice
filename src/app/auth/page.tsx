@@ -1,22 +1,19 @@
 'use client'
 import Link from 'next/link'
 import { useRef } from 'react'
-import { useStore } from '../../store/store'
-import { useRouter } from 'next/navigation'
-import { GET } from '../api/user'
+import { GET } from '../../api/user'
 
 export default function Page() {
   const usernameRef = useRef<HTMLInputElement | null>(null)
   const passwordRef = useRef<HTMLInputElement | null>(null)
-  const { push } = useRouter()
-  const { changeState, changeUsername } = useStore()
+  // const { changeState, changeUsername } = useStore()
 
   const handleSignIn = () => {
-    changeState(true)
-    if (usernameRef.current) {
-      changeUsername(usernameRef.current.value)
-      push('/')
-    }
+    // changeState(true)
+    // if (usernameRef.current) {
+    //   changeUsername(usernameRef.current.value)
+    //   push('/')
+    // }
   }
 
   const handleMatchPasswords = (response: any) => {
@@ -34,7 +31,7 @@ export default function Page() {
   }
 
   return (
-    <main className="text-white font-bold flex h-screen">
+    <div className="text-white font-bold flex h-screen">
       <div className="w-[300px] flex bg-slate-100/20 h-[350px] m-auto text-3xl rounded-lg align-middle justify-center items-center">
         <form className="flex flex-col w-[250px] text-center m-auto">
           <label>Username:</label>
@@ -45,6 +42,6 @@ export default function Page() {
           <Link href='/auth/reg' className="text-gray-400 text-sm mt-5 hover:text-white">I don&lsquo;t have an account</Link>
         </form>
       </div>
-    </main>
+    </div>
   )
 }
