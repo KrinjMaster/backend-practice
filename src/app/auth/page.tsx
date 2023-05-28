@@ -11,9 +11,9 @@ export default function Page() {
     e.preventDefault()
     const username = e.target.username.value
     const password = e.target.password1.value
-    GET(username).then((response: any) => {
+    GET(username).then((response) => {
       if (JSON.stringify(response) !== undefined) {
-        if (response.password === password) {
+        if (response?.password === password) {
           push(`/users/${username}`)
         }
         else {
