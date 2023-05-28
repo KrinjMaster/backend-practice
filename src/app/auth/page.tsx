@@ -1,45 +1,41 @@
 'use client'
 import Link from 'next/link'
-import { useRef } from 'react'
 import { GET } from '../../api/user'
+import { useRouter } from 'next/navigation'
+import { FormEvent } from 'react'
+import { Target } from '@/interface/IUserInfo'
 
 export default function Page() {
-  const usernameRef = useRef<HTMLInputElement | null>(null)
-  const passwordRef = useRef<HTMLInputElement | null>(null)
-  // const { changeState, changeUsername } = useStore()
-
-  const handleSignIn = () => {
-    // changeState(true)
-    // if (usernameRef.current) {
-    //   changeUsername(usernameRef.current.value)
-    //   push('/')
-    // }
-  }
-
-  const handleMatchPasswords = (response: any) => {
-    passwordRef.current?.value === response?.password ? handleSignIn() : alert('Password dont`t match')
-  }
-
-  const handleSubmit = () => {
-    if (usernameRef.current && passwordRef.current && passwordRef.current.value.length > 0 && usernameRef.current.value.length > 0) {
-      GET(usernameRef.current.value)
-      .then((response) => response === null ? alert('User doesn`t exist') : handleMatchPasswords(response))
-    }
-    else {
-      alert('Please enter your username and password')
-    }
+  const { push } = useRouter()
+  const handleSubmit = async (e: FormEvent<HTMLFormElement> & {target: Target}) => {
+    e.preventDefault()
+    const username = e.target.username.value
+    const password = e.target.password1.value
+    GET(username).then((response: any) => {
+      if (JSON.stringify(response) !== undefined) {
+        if (response.password === password) {
+          push(`/users/${username}`)
+        }
+        else {
+          alert('Password must match')
+        }
+      }
+      else {
+        alert('User does not already exists')
+      }
+    })
   }
 
   return (
     <div className="text-white font-bold flex h-screen">
       <div className="w-[300px] flex bg-slate-100/20 h-[350px] m-auto text-3xl rounded-lg align-middle justify-center items-center">
-        <form className="flex flex-col w-[250px] text-center m-auto">
+        <form className="flex flex-col w-[250px] text-left m-auto" onSubmit={handleSubmit}>
           <label>Username:</label>
-          <input ref={usernameRef} type="text" className="bg-transparent border-2 rounded-lg text-lg"></input>
+          <input type="text" id='username' minLength={3} maxLength={15} className="bg-transparent border rounded-lg text-lg"></input>
           <label>Password:</label>
-          <input ref={passwordRef} type="password" className="bg-transparent border-2 rounded-lg text-lg"></input>
-          <input className="text-zinc-600 bg-white rounded-lg relative bottom-0 mt-5" type="button" value="Log in" onClick={handleSubmit}/>
-          <Link href='/auth/reg' className="text-gray-400 text-sm mt-5 hover:text-white">I don&lsquo;t have an account</Link>
+          <input type="password" id='password1' minLength={1} className="bg-transparent rounded-lg text-lg border"></input>
+          <button className="text-zinc-600 bg-white rounded-lg relative bottom-0 mt-5 hover:text-black transition-all duration-300 ease-in-out" type="submit">Log in</button>
+          <Link href='/auth/reg' className="text-gray-400 text-center text-sm mt-5 hover:text-black bg-white w-fit px-1.5 rounded-md m-auto transition-all duration-300 ease-in-out">I don&lsquo;t have an account</Link>
         </form>
       </div>
     </div>
