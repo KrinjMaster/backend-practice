@@ -1,13 +1,13 @@
 'use client'
 import Link from 'next/link'
-import { GET } from '../../api/user'
+import { GET } from '../../api/get'
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
-import { Target } from '@/interface/IUserInfo'
+import { ITarget } from '@/interface/ITarget'
 
 export default function Page() {
   const { push } = useRouter()
-  const handleSubmit = async (e: FormEvent<HTMLFormElement> & {target: Target}) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement> & {target: ITarget}) => {
     e.preventDefault()
     const username = e.target.username.value
     const password = e.target.password1.value
