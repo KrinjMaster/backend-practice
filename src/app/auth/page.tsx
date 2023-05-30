@@ -4,6 +4,7 @@ import { GET } from '../../api/get'
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
 import { ITarget } from '@/interface/ITarget'
+import { COOKIEADD } from '@/api/cookieAdd'
 
 export default function Page() {
   const { push } = useRouter()
@@ -14,6 +15,7 @@ export default function Page() {
     GET(username).then((response) => {
       if (JSON.stringify(response) !== undefined) {
         if (response?.password === password) {
+          COOKIEADD(username)
           push(`/users/${username}`)
         }
         else {

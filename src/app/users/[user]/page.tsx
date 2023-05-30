@@ -31,8 +31,13 @@ export default async function Page({ params }:  {params: {user: string}}) {
     return (
       <div className='flex justify-end'>
         <div className='w-screen h-fit text-white text-xl flex flex-col p-3.5'>
-          <h1 className='bg-transparent font-bold text-7xl'>{params.user}</h1>
-          <h1 className='text-zinc-500'>joined {`${date.getDate() > 10 ? date.getDate() : '0'+date.getDate()}.${date.getMonth() > 10 ? date.getMonth() : '0'+date.getMonth()}.${date.getFullYear()}`}</h1>
+          <div className='flex gap-1.5'>
+            <div className='h-24 w-24 bg-slate-500 rounded-full'></div>
+            <div className='flex flex-col gap-1'>
+              <h1 className='bg-transparent font-bold text-7xl'>{params.user}</h1>
+              <h1 className='text-zinc-500'>joined {`${date.getDate() > 10 ? date.getDate() : '0'+date.getDate()}.${date.getMonth() > 10 ? date.getMonth() : '0'+date.getMonth()}.${date.getFullYear()}`}</h1>
+            </div>
+          </div>
           <div className='w-[60%] h-full mt-5'> 
             {!!isLogged?.value && <div className='h-9 bg-transparent flex gap-2.5'>
             <form action={addPost} className='flex gap-2 w-full'>
