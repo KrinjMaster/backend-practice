@@ -1,13 +1,14 @@
 'use client'
-import { COOKIEADD, GET, POST, POSTDATE } from '@/api/user'
-import { Target } from '@/interface/IUserInfo'
+import { GET } from '@/api/get'
+import { REG } from '@/api/registr'
+import { ITarget } from '@/interface/ITarget'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { FormEvent } from 'react'
 
 export default async function Reg() {
   const router = useRouter()
-  const handleSubmit = async (e: FormEvent<HTMLFormElement> & {target: Target}) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement> & {target: ITarget}) => {
     e.preventDefault()
     const username = e.target.username.value
     const password1 = e.target.password1.value
@@ -17,9 +18,7 @@ export default async function Reg() {
       GET(username).then(user => {
         if (user === null) {
           if (password1 === password2) {
-            POST(username, password1, [])
-            POSTDATE(username)
-            COOKIEADD(username)
+            REG(username, password1)
             router.push('/auth')
           } 
           else {

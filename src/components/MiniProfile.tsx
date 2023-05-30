@@ -8,8 +8,8 @@ export const MiniProfile = async () => {
     // const user = await kv.get<IUserInfo>()
 
     return (
-        <form action="">
-            <label>{}</label>
-        </form>
+        <div className="bg-white w-20 h-20">
+            <h1>Nick</h1>
+        </div>
     )
 }
