@@ -6,8 +6,6 @@ import { cookies } from 'next/headers'
 export async function REG(username: string, password: string) {
   const date = new Date()
   await kv.set<IUserInfo>(`user:${username}`, {
-    image:
-      'https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/external-user-interface-kiranshastry-solid-kiranshastry-1.png',
     username: username,
     password: password,
     date: date.getTime(),
