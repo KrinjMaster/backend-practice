@@ -5,6 +5,7 @@ import { DOWNVOTE } from '@/api/downVote'
 import { UPVOTE } from '@/api/upVote'
 import { experimental_useOptimistic as useOptimistic } from 'react'
 import { IProps } from '@/interface/IProps'
+import Image from 'next/image'
 
 const PostBody = (props: IProps) => {
     const likeCount = props.post.rating
@@ -20,13 +21,15 @@ const PostBody = (props: IProps) => {
         <div className='w-full h-fit bg-zinc-800 rounded-lg p-2 gap-2 flex flex-col'>
             <div className='flex gap-3 text-2xl align-middle'>
                 <div className='flex gap-2'>
-                    <div className='w-14 h-14 bg-slate-500 rounded-full'></div>
-                    <div>
+                    <a href={`users/${props.post.user}`} className='mt-auto mb-auto'>
+                        <Image src={props.profileImage} alt='userImage' width={30} height={30} className='w-12 h-12 rounded-lg'/>
+                    </a>
+                    <div className='mt-auto mb-auto'>
                         <Link href={`/users/${props.post.user}`} className='font-bold'>{props.post.user}</Link>
                         <h1 className='font-bold text-zinc-400 text-sm'>{`${date.getDate() > 10 ? date.getDate() : '0'+date.getDate()}.${date.getMonth() > 10 ? date.getMonth() : '0'+date.getMonth()}.${date.getFullYear()}, ${date.getHours()}:${date.getMinutes() > 10 ? date.getMinutes() : '0'+date.getMinutes() }`}</h1>
                     </div>
                 </div>
-                {props.isLoggedIn &&
+                {props.isCurrentUser &&
                 <button className='ml-auto px-2' onClick={() => DELETEPOST(props.post)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 16 16" className='fill-red-600'> 
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
