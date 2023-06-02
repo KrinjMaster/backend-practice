@@ -1,9 +1,8 @@
 'use client'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { Inter } from 'next/font/google'
 import { COOKIEALL } from '@/api/cookieAll'
 import { useRouter } from 'next/navigation'
-// import { MiniProfile } from '@/components/MiniProfile'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,11 +13,13 @@ export default function RootLayout({
 }) {
   const { push } = useRouter()
 
-  COOKIEALL().then((value) => {
-    if (value.toString() === '') {
-      push('/auth')
-    }
-  })
+  useEffect(() => {
+    COOKIEALL().then((value) => {
+      if (value.toString() === '') {
+        push('/auth')
+      }
+    })
+  },[])
 
   return (
     <html lang="en">

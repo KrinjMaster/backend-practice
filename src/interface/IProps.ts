@@ -1,7 +1,8 @@
 import { IPost } from './IPost'
 
 export interface IProps {
+  profileImage: string
   post: IPost
-  isLoggedIn: boolean
+  isCurrentUser: boolean
   index: number
 }
