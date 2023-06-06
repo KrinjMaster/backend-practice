@@ -34,17 +34,16 @@ export default async function Reg() {
 
   return (
     <div className="text-white font-bold flex h-screen">
-      <div className="w-[300px] flex flex-col bg-slate-100/20 h-[350px] m-auto text-3xl rounded-lg align-middle justify-center items-center p-2">
-        <form className="flex flex-col w-[250px] text-left m-auto text-2xl" id='form' onSubmit={handleSubmit}>
-          <label>Username:</label>
-          <input type="text" spellCheck='false' id='username' minLength={3} maxLength={15} className="bg-transparent rounded-lg text-lg border decoration-transparent"></input>
-          <label>Password:</label>
-          <input type="password" id='password1' className="bg-transparent border rounded-lg text-lg"></input>
-          <label>Re-enter password:</label>
-          <input type="password" id='password2' className="bg-transparent rounded-lg text-lg border"></input>
-          <button className="text-zinc-600 bg-white rounded-lg relative bottom-0 mt-5" type="submit">Register</button>
+      <div className="w-fit bg-[rgb(38,37,37)] shadow-sm shadow-gray-500 flex flex-col h-[40vh] m-auto text-3xl rounded-lg align-middle justify-center items-center p-3">
+        <form className="flex gap-5 flex-col w-fit text-left m-auto text-2xl my-8" id='form' onSubmit={handleSubmit}>
+          <input type="text" spellCheck='false' id='username' minLength={3} maxLength={15} placeholder='Username' className="bg-[rgb(29,29,29)] h-[5vh] shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl"></input>
+          <input type="password" id='password1' placeholder='Password' className="bg-[rgb(29,29,29)] h-[5vh] shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl"></input>
+          <input type="password" id='password2' placeholder='Re-enter password' className="bg-[rgb(29,29,29)] h-[5vh] shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl"></input>
+          <div className='flex justify-between w-full'>
+            <button className="text-white bg-indigo-600 text-xl px-1.5 py-0.5 w-fit mr-auto mt-auto rounded-lg hover:text-gray-400 transition-all duration-300 ease-in-out font-bold" type="submit">Register</button>
+            <Link href='/auth' className="text-white bg-zinc-700 text-xl px-1.5 py-0.5 w-fit ml-auto mt-auto rounded-lg hover:text-red-400 transition-all duration-300 ease-in-out font-bold">Back</Link>
+          </div>
         </form>
-        <Link href='/auth' className='bg-red-500 px-3 rounded-lg text-xl'>Back</Link>
       </div>
     </div>
   )
