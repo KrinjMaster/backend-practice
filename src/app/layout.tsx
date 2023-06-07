@@ -1,5 +1,5 @@
 import './globals.css'
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
