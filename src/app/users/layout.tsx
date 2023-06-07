@@ -24,9 +24,11 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} flex flex-row`}>
-        <Navbar/>
-        {children}
+      <body className={`${inter.className}`}>
+        <div className='flex px-16'>
+          <Navbar/>
+          {children}
+        </div>
       </body>
     </html>
   )

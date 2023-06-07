@@ -33,15 +33,15 @@ export default async function Reg() {
   }
 
   return (
-    <div className="text-white font-bold flex h-screen">
-      <div className="w-fit bg-[rgb(38,37,37)] shadow-sm shadow-gray-500 flex flex-col h-[40vh] m-auto text-3xl rounded-lg align-middle justify-center items-center p-3">
-        <form className="flex gap-5 flex-col w-fit text-left m-auto text-2xl my-8" id='form' onSubmit={handleSubmit}>
-          <input type="text" spellCheck='false' id='username' minLength={3} maxLength={15} placeholder='Username' className="bg-[rgb(29,29,29)] h-[5vh] shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl"></input>
-          <input type="password" id='password1' placeholder='Password' className="bg-[rgb(29,29,29)] h-[5vh] shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl"></input>
-          <input type="password" id='password2' placeholder='Re-enter password' className="bg-[rgb(29,29,29)] h-[5vh] shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl"></input>
+    <div className="text-white font-bold flex h-screen px-5 md:px-0">
+      <div className="w-full md:w-[40vw] h-[50vh] bg-[rgb(38,37,37)] shadow-sm shadow-gray-500 flex p-3 m-auto text-3xl rounded-lg align-middle justify-center items-center">
+        <form className="flex gap-5 flex-col w-full h-full text-left m-auto text-2xl my-8" id='form' onSubmit={handleSubmit}>
+          <input type="text" spellCheck='false' id='username' minLength={3} maxLength={15} placeholder='Username' className="bg-[rgb(29,29,29)] h-12 lg:h-20 shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl lg:text-3xl"></input>
+          <input type="password" id='password1' placeholder='Password' className="bg-[rgb(29,29,29)] h-12 lg:h-20 shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl lg:text-3xl"></input>
+          <input type="password" id='password2' placeholder='Re-enter password' className="bg-[rgb(29,29,29)] h-12 lg:h-20 shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-lg lg:text-3xl"></input>
           <div className='flex justify-between w-full'>
-            <button className="text-white bg-indigo-600 text-xl px-1.5 py-0.5 w-fit mr-auto mt-auto rounded-lg hover:text-gray-400 transition-all duration-300 ease-in-out font-bold" type="submit">Register</button>
-            <Link href='/auth' className="text-white bg-zinc-700 text-xl px-1.5 py-0.5 w-fit ml-auto mt-auto rounded-lg hover:text-red-400 transition-all duration-300 ease-in-out font-bold">Back</Link>
+            <button className="text-white bg-indigo-600 text-xl md:text-3xl xl:text-4xl p-1.5 w-fit mr-auto mt-auto rounded-lg hover:text-gray-400 transition-all duration-300 ease-in-out font-bold" type="submit">Register</button>
+            <Link href='/auth' className="text-white bg-zinc-700 text-xl md:text-3xl xl:text-4xl p-1.5 w-fit ml-auto mt-auto rounded-lg hover:text-red-400 transition-all duration-300 ease-in-out font-bold">Back</Link>
           </div>
         </form>
       </div>

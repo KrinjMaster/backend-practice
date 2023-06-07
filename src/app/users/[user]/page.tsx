@@ -30,7 +30,7 @@ export default async function Page({ params }:  {params: {user: string}}) {
   
     return (<>
       <div className='flex justify-end w-full h-full'>
-        <div className='w-full h-fit text-white text-xl flex flex-col p-3.5'>
+        <div className='w-full h-fit text-white text-xl flex flex-col px-2'>
           <div className='flex gap-1.5'>
             <Image src={user.profileImage} alt='userImage' width={30} height={30} className='w-24 h-24 rounded-xl mt-auto mb-auto'/>
             <div className='flex flex-col gap-1'>
@@ -38,7 +38,7 @@ export default async function Page({ params }:  {params: {user: string}}) {
               <h1 className='text-zinc-500 font-bold'>joined {`${date.getDate() > 10 ? date.getDate() : '0'+date.getDate()}.${date.getMonth() > 10 ? date.getMonth() : '0'+date.getMonth()}.${date.getFullYear()}`}</h1>
             </div>
           </div>
-          <div className='w-[80%] h-full mt-5'> 
+          <div className='w-[90%] h-full mt-5'> 
             {!!isCurrentUser?.value && <div className='h-9 bg-transparent flex gap-2.5'>
             <form action={addPost} className='flex gap-2 w-full'>
               <input className='bg-[rgb(35,35,35)] h-full w-full shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl' type='text' placeholder='new post' name='postBody' spellCheck={true}/>

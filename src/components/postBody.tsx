@@ -36,7 +36,7 @@ const PostBody = (props: IProps) => {
             return Math.floor(dateSince / 60) === 1 ? `${Math.floor(dateSince / 60)} minute ago` : `${Math.floor(dateSince / 60)} minutes ago`
         }
         else {
-            return dateSince == 1 ? `${Math.floor(dateSince)} second ago` : `${Math.floor(dateSince)} seconds ago`
+            return `${Math.floor(dateSince)} seconds ago`
         }
     }
 
