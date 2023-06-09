@@ -7,8 +7,10 @@ import { IUserInfo } from '../../../interface/IUserInfo'
 import Image from 'next/image'
 
 export default async function Page({ params }:  {params: {user: string}}) {
-  const user = await kv.get<IUserInfo | null>(`user:${params.user}`)
-  const posts = await kv.lrange<IPost>(`posts:${params.user}`, 0, -1)
+  const [user, posts] = await Promise.all([
+    await kv.get<IUserInfo | null>(`user:${params.user}`),
+    await kv.lrange<IPost>(`posts:${params.user}`, 0, -1)
+  ])
   const isCurrentUser = cookies().get(params.user)
 
   if (user) {
@@ -41,7 +43,7 @@ export default async function Page({ params }:  {params: {user: string}}) {
           <div className='w-[90%] h-full mt-5'> 
             {!!isCurrentUser?.value && <div className='h-9 bg-transparent flex gap-2.5'>
             <form action={addPost} className='flex gap-2 w-full'>
-              <input className='bg-[rgb(35,35,35)] h-full w-full shadow-sm shadow-gray-500 placeholder:font-normal font-normal px-2 rounded-lg text-xl' type='text' placeholder='new post' name='postBody' spellCheck={true}/>
+              <input className='bg-[#202020] h-full w-full placeholder:font-normal font-normal px-2 rounded-lg text-xl' type='text' placeholder='new post' name='postBody' spellCheck={true}/>
               <button type='submit' className='bg-indigo-600 w-9 rounded-xl flex items-center justify-center align-middle'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className='fill-white'>
                   <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/>

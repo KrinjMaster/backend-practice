@@ -13,6 +13,10 @@ export async function REG(username: string, password: string) {
   })
   await kv.lpush(`posts:${username}`, '')
   await kv.lrem(`posts:${username}`, 1, '')
+  await kv.lpush('users', {
+    username: username,
+    profileImage: `https://api.dicebear.com/6.x/bottts-neutral/svg?seed=${username}`,
+  })
   cookies().set({
     name: username,
     value: 'true',

@@ -41,7 +41,7 @@ const PostBody = (props: IProps) => {
     }
 
     return (
-        <div className='w-full h-fit bg-zinc-800 rounded-lg p-2 gap-2 flex flex-col shadow-sm shadow-gray-500'>
+        <div className='w-full h-fit bg-[#202020] rounded-lg p-2 gap-2 flex flex-col'>
             <div className='flex gap-3 text-2xl align-middle'>
                 <div className='flex gap-2'>
                     <a href={`users/${props.post.user}`} className='mt-auto mb-auto'>
@@ -70,7 +70,7 @@ const PostBody = (props: IProps) => {
             </div>
             <h2 className='w-full break-words font-bold'>{props.post.body}</h2>
             <div className='flex justify-end gap-1'>
-                <div className='bg-zinc-800 rounded-lg px-2 gap-1 flex'>
+                <div className='rounded-lg px-2 gap-1 flex'>
                     <button onClick={() => {
                         addOptimistickLike(optimistickLike.likeCount+1)
                         UPVOTE(props.post, props.index)
