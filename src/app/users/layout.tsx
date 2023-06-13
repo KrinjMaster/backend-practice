@@ -1,11 +1,8 @@
 'use client'
 import { ReactNode, useEffect } from 'react'
-import { Inter } from 'next/font/google'
 import { COOKIEALL } from '@/cookie/cookieAll'
 import { useRouter } from 'next/navigation'
 import Navbar from '@/components/navbar'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
   children,
@@ -23,13 +20,9 @@ export default function RootLayout({
   },[])
 
   return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
-        <div className='flex px-16'>
-          <Navbar/>
-          {children}
-        </div>
-      </body>
-    </html>
+    <div className='flex px-16'>
+      <Navbar/>
+      {children}
+    </div>
   )
 }

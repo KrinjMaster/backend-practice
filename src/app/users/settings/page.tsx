@@ -13,6 +13,18 @@ export default async function Page() {
     redirect('/auth')
   }
 
+  const handleDelete = async () => {
+    'use server'
+    await kv.del(`user:${user}`)
+    await kv.del(`posts:${user}`)
+    await kv.lrem(`users`, 1, {
+      username: userData?.username,
+      profileImage: userData?.profileImage
+    })
+    cookies().delete(user)
+    redirect('/auth')
+  }
+
   return (
     <div className='w-full h-screen rounded-lg text-white text-xl p-1 flex'>
       <form className='flex gap-1 flex-col mx-auto' action={handleSignOut}>
@@ -24,7 +36,10 @@ export default async function Page() {
           <p className='text-gray-500 font-light text-lg'>password</p>
           <h1 className='font-bold text-3xl'>{userData?.password}</h1>
         </div> 
-        <input className='bg-indigo-600 hover:bg-indigo-800 rounded-lg font-bold p-1 w-fit transition-all duration-150 ease-in-out mr-auto' type='submit' value='Log out'/>
+        <div className='flex'>
+          <input className='bg-indigo-600 hover:bg-indigo-800 rounded-lg font-bold p-1 w-fit transition-all duration-150 ease-in-out mr-auto' type='submit' value='Log out'/>
+          <button className='bg-indigo-600 hover:bg-indigo-800 rounded-lg font-bold p-1 w-fit transition-all duration-150 ease-in-out ml-auto' value='Delete profile' formAction={handleDelete}>Delete profile</button>
+        </div>
       </form>
     </div>
   )

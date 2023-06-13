@@ -12,7 +12,7 @@ export default async function Page({ params }:  {params: {user: string}}) {
     await kv.lrange<IPost>(`posts:${params.user}`, 0, -1)
   ])
   const isCurrentUser = cookies().get(params.user)
-
+  
   if (user) {
     const date = new Date(user.date)
     const addPost = async (formdata: FormData) => {
@@ -29,7 +29,7 @@ export default async function Page({ params }:  {params: {user: string}}) {
         revalidatePath(`users/${params.user}`)
       }
     }
-  
+    
     return (<>
       <div className='flex justify-end w-full h-full'>
         <div className='w-full h-fit text-white text-xl flex flex-col px-2'>
@@ -55,6 +55,7 @@ export default async function Page({ params }:  {params: {user: string}}) {
             ? <h1 className='font-bold text-center'>No posts yet</h1> 
             : <div className='flex flex-col gap-2 mt-2'>
             {posts.map((post, index) => 
+                // @ts-expect-error Server Component 
                 <PostBody post={post} index={index} isCurrentUser={!!isCurrentUser?.value} profileImage={user.profileImage} key={post.date}/>  
                 )}
             </div>}
