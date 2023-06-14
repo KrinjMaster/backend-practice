@@ -43,16 +43,16 @@ const PostBody = (props: IProps) => {
             }
             
             return (
-                <div className='w-full h-fit bg-[#202020] rounded-lg p-2 gap-2 flex flex-col'>
+            <div className='w-full h-fit bg-[#202020] rounded-lg p-2 gap-2 flex flex-col'>
                 <div className='flex gap-3 text-2xl align-middle'>
                     <div className='flex gap-2'>
-                        <a href={`users/${props.post.user}`} className='mt-auto mb-auto'>
+                        <a href={`users/${props.post.user}`} className='mt-auto mb-auto md:block hidden text-2xl'>
                             <Image src={props.profileImage} alt='userImage' width={30} height={30} className='w-12 h-12 rounded-lg'/>
                         </a>
                         <div className='mt-auto mb-auto'>
                             <div className='flex'>
                                 <Link href={`/users/${props.post.user}`} className='font-bold'>{props.post.user}</Link>
-                                <div className='flex group'>
+                                <div className='md:flex group hidden'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" className='scale-75 w-8 h-8 my-auto stroke-gray-400 p-1'>
                                         <path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 11h6v1h-7v-9h1v8z"/>
                                     </svg>

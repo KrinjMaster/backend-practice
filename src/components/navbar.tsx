@@ -18,8 +18,8 @@ const Navbar = () => {
         })
     },[])
 
-    return (
-        <div className="w-[25%] h-screen">
+    return (<>
+        <div className="w-[25%] h-screen md:block hidden">
             <div className='flex flex-col items-center gap-0.5'>
                     <Link href={url?.url === undefined ? '/users/user' : url?.url} className={`${pathname === url?.url ? 'text-white bg-indigo-600' : 'text-gray-500 hover:bg-zinc-400 hover:bg-opacity-10'} flex text-2xl font-bold hover:text-white px-3 rounded-lg w-full items-center gap-3 transition-all duration-150 ease-in-out`}>
                         <svg className="fill-current p-1 h-10 w-10" viewBox="0 0 18 18">
@@ -43,6 +43,7 @@ const Navbar = () => {
                     </Link>
             </div>
         </div>
+    </>
     )
 }
 

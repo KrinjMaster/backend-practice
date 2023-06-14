@@ -3,6 +3,7 @@ import { ReactNode, useEffect } from 'react'
 import { COOKIEALL } from '@/cookie/cookieAll'
 import { useRouter } from 'next/navigation'
 import Navbar from '@/components/navbar'
+import MobileNavbar from '../../components/mobileNavbar'
 
 export default function RootLayout({
   children,
@@ -20,9 +21,10 @@ export default function RootLayout({
   },[])
 
   return (
-    <div className='flex px-16'>
+    <div className='flex max-w-[1024px] mx-auto md:flex-row flex-col'>
       <Navbar/>
       {children}
+      <MobileNavbar/>
     </div>
   )
 }
