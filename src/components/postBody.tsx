@@ -76,7 +76,7 @@ const PostBody = (props: IProps) => {
                         <button onClick={() => {
                             addOptimistickLike(optimistickLike.likeCount+1)
                             UPVOTE(props.post, props.index)
-                        }} className='text-indigo-300 font-bold bg-indigo-600 w-7 rounded-lg'>↑</button>
+                        }} className='text-indigo-300 font-bold bg-violet-500 w-7 rounded-lg'>↑</button>
                         <h1 className='text-center font-bold px-2'>{optimistickLike.likeCount}</h1>
                         <button onClick={() => {
                             addOptimistickLike(optimistickLike.likeCount-1)
