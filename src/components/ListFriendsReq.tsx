@@ -1,17 +1,17 @@
-import { IPending } from '@/interface/IPending'
+import { IFriendReq } from '@/interface/IFriendReq'
 import kv from '@vercel/kv'
 import { revalidatePath } from 'next/cache'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const ListPending = async (request: IPending) => {
+const ListFriendsReq = async (request: IFriendReq) => {
     const handleAccept = async () => {
         'use server'
         await kv.lpush(`user:${request.from}:friends`, {username: request.from, profileImage: request.profileImage})
         await kv.lrem(`user:${request.to}:pendings`, 1, request)
         revalidatePath('users/messages/pending')
     }
-    
+
     const handleDeny = async () => {
         'use server'
         await kv.lrem(`user:${request.to}:pendings`, 1, request)
@@ -32,4 +32,4 @@ const ListPending = async (request: IPending) => {
     )
 }
 
-export default ListPending
+export default ListFriendsReq

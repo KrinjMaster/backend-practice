@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { IUserInfo } from '../../../interface/IUserInfo'
 import Image from 'next/image'
-import { IPending } from '@/interface/IPending'
+import { IFriendReq } from '@/interface/IFriendReq'
 
 export default async function Page({ params }:  {params: {user: string}}) {
   const currentUser = cookies().getAll()[0].name
@@ -35,7 +35,10 @@ export default async function Page({ params }:  {params: {user: string}}) {
 
     const addFriend = async () => {
       'use server'
-      loggedUser ? await kv.lpush<IPending>(`user:${params.user}:pendings`, { to: params.user, profileImage: loggedUser?.profileImage, from: currentUser}) : null
+      if (loggedUser) {
+        await kv.lpush<IFriendReq>(`user:${params.user}:incoming`, { to: params.user, profileImage: loggedUser.profileImage, from: currentUser})
+        await kv.lpush(`user:${currentUser}:pending`, { to: currentUser, profileImage: user.profileImage, from: params.user})
+      }
     }
     
     return (<>
