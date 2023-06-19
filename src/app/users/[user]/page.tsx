@@ -5,14 +5,11 @@ import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { IUserInfo } from '../../../interface/IUserInfo'
 import Image from 'next/image'
-import { IFriendReq } from '@/interface/IFriendReq'
 
 export default async function Page({ params }:  {params: {user: string}}) {
-  const currentUser = cookies().getAll()[0].name
-  const [user, posts, loggedUser] = await Promise.all([
+  const [user, posts] = await Promise.all([
     await kv.get<IUserInfo | null>(`user:${params.user}`),
     await kv.lrange<IPost>(`posts:${params.user}`, 0, -1),
-    await kv.get<IUserInfo | null>(`user:${currentUser}`)
   ])
   const isCurrentUser = cookies().get(params.user)
   
@@ -33,13 +30,6 @@ export default async function Page({ params }:  {params: {user: string}}) {
       }
     }
 
-    const addFriend = async () => {
-      'use server'
-      if (loggedUser) {
-        await kv.lpush<IFriendReq>(`user:${params.user}:incoming`, { to: params.user, profileImage: loggedUser.profileImage, from: currentUser})
-        await kv.lpush(`user:${currentUser}:pending`, { to: currentUser, profileImage: user.profileImage, from: params.user})
-      }
-    }
     
     return (<>
       <div className='flex justify-end w-full h-full md:mb-0 mb-24'>
@@ -50,9 +40,8 @@ export default async function Page({ params }:  {params: {user: string}}) {
               <h1 className='bg-transparent font-bold md:text-7xl text-lg min-[300px]:text-3xl'>{user.username}</h1>
               <h1 className='text-zinc-500 font-bold md:text-xl text-sm'>joined {`${date.getDate() > 10 ? date.getDate() : '0'+date.getDate()}.${date.getMonth() > 10 ? date.getMonth() : '0'+date.getMonth()}.${date.getFullYear()}`}</h1>
             </div>
-            {!!isCurrentUser?.value === false ? <form action={addFriend} className='mt-1 ml-auto'><input className='bg-violet-500 hover:bg-violet-700 h-fit p-1 font-bold rounded-lg' formAction={addFriend} value='Add friend' type='submit'/></form> : null}
           </div>
-          <div className='md:w-[80%] w-full h-full mt-5'> 
+          <div className='md:w-[80%] w-full h-full mt-5'>
             {!!isCurrentUser?.value && <div className='h-9 bg-transparent flex gap-2.5'>
             <form name='form' action={addPost} className='flex gap-2 w-full'>
               <input className='bg-[#202020] h-full w-[95%] placeholder:font-normal font-normal px-2 rounded-lg text-xl' type='text' placeholder='new post' name='postBody' spellCheck={true}/>

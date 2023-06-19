@@ -21,7 +21,7 @@ export default function RootLayout({
   },[])
 
   return (
-    <div className='flex max-w-[1024px] mx-auto md:flex-row flex-col'>
+    <div className='flex max-w-[1024px] mx-auto md:flex-row flex-col md:pt-0 pt-1'>
       <Navbar/>
       {children}
       <MobileNavbar/>
